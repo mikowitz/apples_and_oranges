@@ -1,0 +1,19 @@
+!!!
+%html(lang="en")
+  %head
+    %link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+    %title Apples and Oranges
+
+  %body
+    .container
+      %h1.text-center Apples and Oranges
+
+      %img(src="../screens/first_test/accepted.jpg")
+
+      = @paths |> Enum.map fn path ->
+        .row
+          .col-sm-6= path
+        .row
+          .col-sm-4.col-sm-offset-8
+            -# %img(src="#{path <> "/accepted.jpg"}")
+      - end
