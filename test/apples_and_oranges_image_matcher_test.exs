@@ -2,7 +2,7 @@ defmodule ApplesAndOrangesImageMatcherTest do
   use ExUnit.Case
   alias ApplesAndOranges.Test
 
-  setup do
+  setup_all do
     on_exit fn ->
       Path.wildcard("test/priv/static/screens/**/diff.{png,jpg}") |> Enum.map(&File.rm(&1))
     end
@@ -17,6 +17,11 @@ defmodule ApplesAndOrangesImageMatcherTest do
 
   test "does not match when the accepted and current images are different" do
     refute ApplesAndOranges.ImageMatcher.matches?(@diffing_test)
+  end
+
+  test "generates a diff file when the accepted and current images are different" do
+    ApplesAndOranges.ImageMatcher.matches?(@diffing_test)
+    assert Test.diff_image(@diffing_test)
   end
 
   test "matches when the accepted and current images match given a fuzz factor" do
