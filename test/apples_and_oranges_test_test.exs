@@ -2,6 +2,9 @@ defmodule ApplesAndOrangesTestTest do
   use ExUnit.Case
   alias ApplesAndOranges.Test
 
+  use Hound.Helpers
+  hound_session
+
   @accepted_test %Test{path: "test/priv/static/screens/accepted_test"}
   @empty_test %Test{path: "test/priv/static/screens/empty_test"}
 

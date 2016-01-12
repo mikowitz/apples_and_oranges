@@ -15,7 +15,7 @@ defmodule ApplesAndOranges.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:trot, :logger]]
+    [applications: [:trot, :hound, :logger]]
   end
 
   # Dependencies can be Hex packages:
@@ -28,7 +28,8 @@ defmodule ApplesAndOranges.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:trot, github: "mikowitz/trot"}]
+    [{:hound, "~> 0.7.4"},
+     {:trot, github: "mikowitz/trot"}]
   end
 
   defp package do

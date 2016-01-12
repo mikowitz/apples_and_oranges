@@ -1,8 +1,11 @@
 defmodule ApplesAndOranges.Test do
   defstruct path: ""
 
-  def accepted_image(nil), do: nil
+  def ensure_directory(test) do
+    test.path |> Path.absname |> File.mkdir_p!
+  end
 
+  def accepted_image(nil), do: nil
   def accepted_image(test) do
     Path.wildcard(test.path <> "/accepted.{png,jpg}") |> Enum.find(&File.exists?(&1))
   end
@@ -12,6 +15,7 @@ defmodule ApplesAndOranges.Test do
     test |> accepted_image |> strip_priv_static
   end
 
+  def has_accepted_image?(test), do: accepted_image(test) != nil
 
   def current_image(nil), do: nil
   def current_image(test) do

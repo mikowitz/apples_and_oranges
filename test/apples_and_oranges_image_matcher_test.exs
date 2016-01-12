@@ -10,13 +10,18 @@ defmodule ApplesAndOrangesImageMatcherTest do
 
   @matching_test %Test{path: "test/priv/static/screens/matching_test"}
   @diffing_test %Test{path: "test/priv/static/screens/diffing_test"}
+  @empty_test %Test{path: "test/priv/static/screens/empty_test"}
 
   test "matches when the accepted and current images are the same" do
-    assert ApplesAndOranges.ImageMatcher.matches?(@matching_test)
+    assert {:ok, _} = ApplesAndOranges.ImageMatcher.matches?(@matching_test)
   end
 
   test "does not match when the accepted and current images are different" do
-    refute ApplesAndOranges.ImageMatcher.matches?(@diffing_test)
+    assert {:error, _} = ApplesAndOranges.ImageMatcher.matches?(@diffing_test)
+  end
+
+  test "returns an error when there is no accepted image" do
+    assert {:raise, _} = ApplesAndOranges.ImageMatcher.matches?(@empty_test)
   end
 
   test "generates a diff file when the accepted and current images are different" do
