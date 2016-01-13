@@ -45,14 +45,21 @@ defmodule ApplesAndOranges.Test do
   def current?(test), do: !!current_image(test)
   def diff?(test), do: !!diff_image(test)
 
+  def accept!(test) do
+    IO.inspect "+==================> HERE WE ARE!"
+    File.cp(test.path <> "/current.png", test.path <> "/accepted.png")
+    File.rm(test.path <> "/current.png")
+    File.rm(test.path <> "/diff.png")
+  end
+
   def status(test) do
     cond do
       diff?(test) ->
         "diff"
-      current?(test) ->
-        "current"
       accepted?(test) ->
         "accepted"
+      current?(test) ->
+        "current"
     end
   end
 end

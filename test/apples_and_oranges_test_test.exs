@@ -5,8 +5,8 @@ defmodule ApplesAndOrangesTestTest do
   use Hound.Helpers
   hound_session
 
-  @accepted_test %Test{path: "test/priv/static/screens/accepted_test"}
-  @empty_test %Test{path: "test/priv/static/screens/empty_test"}
+  @accepted_test %Test{path: "priv/static/screens/accepted_test"}
+  @empty_test %Test{path: "priv/static/screens/empty_test"}
 
   test "can find existing accepted image" do
     assert Test.accepted_image(@accepted_test)

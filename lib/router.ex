@@ -5,6 +5,17 @@ defmodule ApplesAndOranges.Router do
 
   plug Plug.Static, at: "/", from: Application.get_env(:apples_and_oranges, :static_app)
 
+  get "/test" do
+    query = URI.query_decoder(conn.query_string) |> Enum.map(&(&1)) |> List.first
+    {_, path} = query
+    IO.inspect "==============> #{path}"
+    test = %Test{path: path}
+    IO.inspect "==============>"
+    IO.inspect test
+    Test.accept!(test)
+    {:redirect, "/"}
+  end
+
   get "/" do
     IO.inspect System.cwd
     tests = Path.wildcard("priv/static/screens/**/*.{png,jpg}")

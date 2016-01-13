@@ -5,6 +5,7 @@
 
 .accepted {
   background-color: green;
+  display: none;
 }
 
 .current {

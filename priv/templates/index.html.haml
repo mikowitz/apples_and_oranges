@@ -3,27 +3,43 @@
   %head
     %link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
     %link(rel="stylesheet" href="css/app.css")
+    %script(type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js")
+    %script(type="text/javascript" src="js/app.js")
     %title Apples and Oranges
 
   %body
     .container
       %h1.text-center Apples and Oranges
 
+      %input#hide-successes(type="checkbox" checked="checked")
+      %p Only show failures
+
       %table.table
         %thead
-          %th Current
           %th Accepted
+          %th Current
           %th Diff
         %tbody
           = @tests |> Enum.map fn test ->
-            - class_name = ApplesAndOranges.Test.status(test)
-            %tr(class="#{class_name}")
+            - status = ApplesAndOranges.Test.status(test)
+            %tr(class="#{status}")
               %td
-                %img(src="#{ApplesAndOranges.Test.current_image_as_src(test)}" height=200)
+                = if ApplesAndOranges.Test.accepted_image(test) do
+                  %a(href="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" height=200)
+                - end
               %td
-                %a(href="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" target="_blank")
-                  %img(src="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" height=200)
+                = if ApplesAndOranges.Test.current_image(test) do
+                  %a(href="#{ApplesAndOranges.Test.current_image_as_src(test)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.Test.current_image_as_src(test)}" height=200)
+                  %br
+                  %a.btn.btn-primary(role="button" href="/test?path=#{test.path}")
+                    Accept?
+                - end
               %td
-                %img(src="#{ApplesAndOranges.Test.diff_image_as_src(test)}" height=200)
+                = if ApplesAndOranges.Test.diff_image(test) do
+                  %a(href="#{ApplesAndOranges.Test.diff_image_as_src(test)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.Test.diff_image_as_src(test)}" height=200)
+                - end
             -# - end
           - end
