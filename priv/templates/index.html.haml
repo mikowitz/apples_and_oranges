@@ -2,9 +2,29 @@
 %html(lang="en")
   %head
     %link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
-    %link(rel="stylesheet" href="css/app.css")
+    %style(type="text/css")
+      [class="accepted"] {
+        background-color: green;
+        display: none;
+      }
+      [class="current"] {
+        background-color: yellow;
+      }
+      [class="diff"] {
+        background-color: red;
+      }
     %script(type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js")
-    %script(type="text/javascript" src="js/app.js")
+    %script(type="text/javascript")
+      $(document).ready(function() {
+        $("#hide-successes").on("change", function(event) {
+          if (event.target.checked) {
+            $(".accepted").css("display", "none");
+          } else {
+            $(".accepted").css("display", "table-row");
+          }
+        });
+      });
+
     %title Apples and Oranges
 
   %body
@@ -41,5 +61,4 @@
                   %a(href="#{ApplesAndOranges.ScreenshotSet.diff_image_src(set)}" target="_blank")
                     %img(src="#{ApplesAndOranges.ScreenshotSet.diff_image_src(set)}" height=200)
                 - end
-            -# - end
           - end
