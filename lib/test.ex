@@ -46,10 +46,11 @@ defmodule ApplesAndOranges.Test do
   def diff?(test), do: !!diff_image(test)
 
   def accept!(test) do
-    IO.inspect "+==================> HERE WE ARE!"
-    File.cp(test.path <> "/current.png", test.path <> "/accepted.png")
-    File.rm(test.path <> "/current.png")
-    File.rm(test.path <> "/diff.png")
+    File.cp(current_image(test), current_image(test) |> String.replace("current.", "accepted."))
+    File.rm(current_image(test))
+    if diff_image(test) do
+      File.rm(diff_image(test))
+    end
   end
 
   def status(test) do
