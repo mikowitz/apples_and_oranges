@@ -10,13 +10,6 @@ defmodule ApplesAndOrangesTestHelperTest do
   @accepted_test %Test{path: "priv/static/screens/accepted_test"}
   @empty_test %Test{path: "priv/static/screens/empty_test"}
 
-  setup_all do
-    on_exit fn ->
-      Path.wildcard("test/priv/static/screens/**/diff.{png,jpg}") |> Enum.map(&File.rm(&1))
-      Path.wildcard(@accepted_test.path <> "/current.{png,jpg}") |> Enum.map(&File.rm(&1))
-    end
-  end
-
   test "save_screenshot takes a 'current' screenshot" do
     save_screenshot(@accepted_test)
     assert Test.current_image(@accepted_test)

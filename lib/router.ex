@@ -8,10 +8,7 @@ defmodule ApplesAndOranges.Router do
   get "/test" do
     query = URI.query_decoder(conn.query_string) |> Enum.map(&(&1)) |> List.first
     {_, path} = query
-    IO.inspect "==============> #{path}"
     test = %Test{path: path}
-    IO.inspect "==============>"
-    IO.inspect test
     Test.accept!(test)
     {:redirect, "/"}
   end

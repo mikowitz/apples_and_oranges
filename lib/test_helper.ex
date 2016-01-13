@@ -16,8 +16,8 @@ defmodule ApplesAndOranges.TestHelper do
     save_screenshot(test)
     case ImageMatcher.matches?(test) do
       {:ok, _} ->
-        File.wildcard(test.path <> "/diff.png") |> Enum.map(&File.rm(&1))
-        File.wildcard(test.path <> "/current.png") |> Enum.map(&File.rm(&1))
+        Path.wildcard(test.path <> "/diff.png") |> Enum.map(&File.rm(&1))
+        Path.wildcard(test.path <> "/current.png") |> Enum.map(&File.rm(&1))
         true
       {:error, _} -> false
       {:raise, msg} -> raise msg
