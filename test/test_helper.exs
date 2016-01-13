@@ -16,7 +16,7 @@ IO.inspect "Stopping Hound and restarting with options for test suite..."
 :ok = :application.stop(:hound)
 
 Hound.Supervisor.start_link([
-  driver: System.get_env("WEBDRIVER"),
+  driver: System.get_env("WEBDRIVER") || "phantomjs",
   app_port: 9090
 ])
 

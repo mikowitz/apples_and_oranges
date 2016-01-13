@@ -2,23 +2,28 @@
 %html(lang="en")
   %head
     %link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+    %link(rel="stylesheet" href="css/app.css")
     %title Apples and Oranges
 
   %body
     .container
       %h1.text-center Apples and Oranges
 
-      = @tests |> Enum.map fn test ->
-        .row
-          .col-sm-6= test.path
-        .row
-          .col-sm-4
-            accepted
-            %img(src="#{ApplesAndOranges.Test.accepted_image_as_src(test)}")
-          .col-sm-4
-            current
-            %img(src="#{ApplesAndOranges.Test.current_image_as_src(test)}")
-          .col-sm-4
-            diff
-            %img(src="#{ApplesAndOranges.Test.diff_image_as_src(test)}")
-      - end
+      %table.table
+        %thead
+          %th Current
+          %th Accepted
+          %th Diff
+        %tbody
+          = @tests |> Enum.map fn test ->
+            - class_name = ApplesAndOranges.Test.status(test)
+            %tr(class="#{class_name}")
+              %td
+                %img(src="#{ApplesAndOranges.Test.current_image_as_src(test)}" height=200)
+              %td
+                %a(href="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" target="_blank")
+                  %img(src="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" height=200)
+              %td
+                %img(src="#{ApplesAndOranges.Test.diff_image_as_src(test)}" height=200)
+            -# - end
+          - end

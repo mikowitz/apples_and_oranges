@@ -10,8 +10,7 @@ defmodule ApplesAndOranges.ImageMatcher do
   end
 
   def matches?(test, fuzz \\ 0) do
-    accepted = Test.absolute_path(Test.accepted_image(test))
-    if accepted do
+    if Test.accepted?(test) do
       case compare(test, fuzz) do
         '0' -> {:ok, "Matched"}
         _ -> {:error, "Did not match"}

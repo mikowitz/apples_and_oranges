@@ -15,8 +15,6 @@ defmodule ApplesAndOranges.Test do
     test |> accepted_image |> strip_priv_static
   end
 
-  def has_accepted_image?(test), do: accepted_image(test) != nil
-
   def current_image(nil), do: nil
   def current_image(test) do
     Path.wildcard(test.path <> "/current.{png,jpg}") |> Enum.find(&File.exists?(&1))
@@ -42,4 +40,19 @@ defmodule ApplesAndOranges.Test do
 
   defp strip_priv_static(nil), do: nil
   defp strip_priv_static(path), do: path |> String.replace("priv/static", "")
+
+  def accepted?(test), do: !!accepted_image(test)
+  def current?(test), do: !!current_image(test)
+  def diff?(test), do: !!diff_image(test)
+
+  def status(test) do
+    cond do
+      diff?(test) ->
+        "diff"
+      current?(test) ->
+        "current"
+      accepted?(test) ->
+        "accepted"
+    end
+  end
 end
