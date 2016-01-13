@@ -1,10 +1,11 @@
 defmodule ApplesAndOrangesImageMatcherTest do
   use ExUnit.Case
-  alias ApplesAndOranges.Test
+  alias ApplesAndOranges.ScreenshotSet
+  import ApplesAndOranges.TestHelpers
 
-  @matching_test %Test{path: "priv/static/screens/matching_test"}
-  @diffing_test %Test{path: "priv/static/screens/diffing_test"}
-  @empty_test %Test{path: "priv/static/screens/empty_test"}
+  @matching_test build_set("matching_test")
+  @diffing_test build_set("diffing_test")
+  @empty_test build_set("empty_test")
 
   test "matches when the accepted and current images are the same" do
     assert {:ok, _} = ApplesAndOranges.ImageMatcher.matches?(@matching_test)
@@ -20,7 +21,7 @@ defmodule ApplesAndOrangesImageMatcherTest do
 
   test "generates a diff file when the accepted and current images are different" do
     ApplesAndOranges.ImageMatcher.matches?(@diffing_test)
-    assert Test.diff_image(@diffing_test)
+    assert ScreenshotSet.diff_image(@diffing_test)
   end
 
   test "matches when the accepted and current images match given a fuzz factor" do

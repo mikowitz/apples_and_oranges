@@ -3,16 +3,16 @@ defmodule ApplesAndOrangesTestHelperTest do
   use Hound.Helpers
   use ApplesAndOranges.TestHelper
 
-  alias ApplesAndOranges.Test
+  alias ApplesAndOranges.ScreenshotSet
 
   hound_session
 
-  @accepted_test %Test{path: "priv/static/screens/accepted_test"}
-  @empty_test %Test{path: "priv/static/screens/empty_test"}
+  @accepted_test %ScreenshotSet{path: "priv/static/screens/accepted_test"}
+  @empty_test %ScreenshotSet{path: "priv/static/screens/empty_test"}
 
   test "save_screenshot takes a 'current' screenshot" do
     save_screenshot(@accepted_test)
-    assert Test.current_image(@accepted_test)
+    assert ScreenshotSet.current_image(@accepted_test)
   end
 
   test "it_looks_right returns true if 'current' and 'accepted' screenshots match" do
@@ -21,7 +21,6 @@ defmodule ApplesAndOrangesTestHelperTest do
   end
 
   test "it_looks_right returns false if 'current' and 'accepted' screenshots do not match" do
-    # navigate nowhere
     refute it_looks_right(@accepted_test.path)
   end
 

@@ -20,26 +20,26 @@
           %th Current
           %th Diff
         %tbody
-          = @tests |> Enum.map fn test ->
-            - status = ApplesAndOranges.Test.status(test)
+          = @sets |> Enum.map fn set ->
+            - status = ApplesAndOranges.ScreenshotSet.status(set)
             %tr(class="#{status}")
               %td
-                = if ApplesAndOranges.Test.accepted_image(test) do
-                  %a(href="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.Test.accepted_image_as_src(test)}" height=200)
+                = if ApplesAndOranges.ScreenshotSet.accepted_image(set) do
+                  %a(href="#{ApplesAndOranges.ScreenshotSet.accepted_image_as_src(set)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.ScreenshotSet.accepted_image_as_src(set)}" height=200)
                 - end
               %td
-                = if ApplesAndOranges.Test.current_image(test) do
-                  %a(href="#{ApplesAndOranges.Test.current_image_as_src(test)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.Test.current_image_as_src(test)}" height=200)
+                = if ApplesAndOranges.ScreenshotSet.current_image(set) do
+                  %a(href="#{ApplesAndOranges.ScreenshotSet.current_image_as_src(set)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.ScreenshotSet.current_image_as_src(set)}" height=200)
                   %br
-                  %a.btn.btn-primary(role="button" href="/test?path=#{test.path}")
+                  %a.btn.btn-primary(role="button" href="/set?path=#{set.path}")
                     Accept?
                 - end
               %td
-                = if ApplesAndOranges.Test.diff_image(test) do
-                  %a(href="#{ApplesAndOranges.Test.diff_image_as_src(test)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.Test.diff_image_as_src(test)}" height=200)
+                = if ApplesAndOranges.ScreenshotSet.diff_image(set) do
+                  %a(href="#{ApplesAndOranges.ScreenshotSet.diff_image_as_src(set)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.ScreenshotSet.diff_image_as_src(set)}" height=200)
                 - end
             -# - end
           - end

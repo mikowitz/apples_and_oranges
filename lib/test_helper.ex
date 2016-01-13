@@ -1,5 +1,5 @@
 defmodule ApplesAndOranges.TestHelper do
-  alias ApplesAndOranges.Test
+  alias ApplesAndOranges.ScreenshotSet
   alias ApplesAndOranges.ImageMatcher
 
   use Hound.Helpers
@@ -11,8 +11,8 @@ defmodule ApplesAndOranges.TestHelper do
   end
 
   def it_looks_right(path) do
-    test = %Test{path: path}
-    Test.ensure_directory(test)
+    test = %ScreenshotSet{path: path}
+    ScreenshotSet.ensure_directory(test)
     save_screenshot(test)
     case ImageMatcher.matches?(test) do
       {:ok, _} ->
