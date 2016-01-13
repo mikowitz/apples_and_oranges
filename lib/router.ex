@@ -5,11 +5,11 @@ defmodule ApplesAndOranges.Router do
 
   plug Plug.Static, at: "/", from: Application.get_env(:apples_and_oranges, :static_app)
 
-  get "/test" do
+  get "/accept" do
     query = URI.query_decoder(conn.query_string) |> Enum.map(&(&1)) |> List.first
     {_, path} = query
     test = %ScreenshotSet{path: path}
-    Test.accept!(test)
+    ScreenshotSet.accept!(test)
     {:redirect, "/"}
   end
 

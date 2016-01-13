@@ -2,11 +2,9 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :apples_and_oranges, port: 1985
 config :apples_and_oranges, static_app: :apples_and_oranges
 
 config :trot, router: ApplesAndOranges.Router
-config :trot, port: Application.get_env(:apples_and_oranges, :port, 1985)
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
@@ -33,4 +31,4 @@ config :trot, port: Application.get_env(:apples_and_oranges, :port, 1985)
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-# import_config "#{Mix.env}.exs"
+import_config "#{Mix.env}.exs"

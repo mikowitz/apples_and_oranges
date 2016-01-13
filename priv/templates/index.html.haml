@@ -25,21 +25,21 @@
             %tr(class="#{status}")
               %td
                 = if ApplesAndOranges.ScreenshotSet.accepted_image(set) do
-                  %a(href="#{ApplesAndOranges.ScreenshotSet.accepted_image_as_src(set)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.ScreenshotSet.accepted_image_as_src(set)}" height=200)
+                  %a(href="#{ApplesAndOranges.ScreenshotSet.accepted_image_src(set)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.ScreenshotSet.accepted_image_src(set)}" height=200)
                 - end
               %td
                 = if ApplesAndOranges.ScreenshotSet.current_image(set) do
-                  %a(href="#{ApplesAndOranges.ScreenshotSet.current_image_as_src(set)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.ScreenshotSet.current_image_as_src(set)}" height=200)
+                  %a(href="#{ApplesAndOranges.ScreenshotSet.current_image_src(set)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.ScreenshotSet.current_image_src(set)}" height=200)
                   %br
-                  %a.btn.btn-primary(role="button" href="/set?path=#{set.path}")
+                  %a.btn.btn-primary(role="button" href="/accept?path=#{set.path}")
                     Accept?
                 - end
               %td
                 = if ApplesAndOranges.ScreenshotSet.diff_image(set) do
-                  %a(href="#{ApplesAndOranges.ScreenshotSet.diff_image_as_src(set)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.ScreenshotSet.diff_image_as_src(set)}" height=200)
+                  %a(href="#{ApplesAndOranges.ScreenshotSet.diff_image_src(set)}" target="_blank")
+                    %img(src="#{ApplesAndOranges.ScreenshotSet.diff_image_src(set)}" height=200)
                 - end
             -# - end
           - end
