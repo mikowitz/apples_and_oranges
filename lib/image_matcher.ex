@@ -12,8 +12,6 @@ defmodule ApplesAndOranges.ImageMatcher do
   def matches?(set, fuzz \\ 0) do
     if ScreenshotSet.accepted?(set) do
       comparison = compare(set, fuzz)
-      IO.inspect "========>"
-      IO.inspect comparison
       case comparison do
         '0' -> {:ok, "Matched"}
         _ -> {:error, "Did not match"}

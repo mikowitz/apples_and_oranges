@@ -3,15 +3,15 @@
   %head
     %link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
     %style(type="text/css")
-      [class="accepted"] {
-        background-color: green;
+      [class*="accepted"] {
+        background-color: #42f207;
         display: none;
       }
-      [class="current"] {
-        background-color: yellow;
+      [class*="current"] {
+        background-color: #e5ed47;
       }
-      [class="diff"] {
-        background-color: red;
+      [class*="diff"] {
+        background-color: #cc3300;
       }
     %script(type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js")
     %script(type="text/javascript")
@@ -42,6 +42,9 @@
         %tbody
           = @sets |> Enum.map fn set ->
             - status = ApplesAndOranges.ScreenshotSet.status(set)
+            %tr(class="#{status}")
+              %td(colspan=3)
+                = set.path
             %tr(class="#{status}")
               %td
                 = if ApplesAndOranges.ScreenshotSet.accepted_image(set) do

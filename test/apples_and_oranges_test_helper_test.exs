@@ -36,4 +36,14 @@ defmodule ApplesAndOrangesTestHelperTest do
       it_looks_right(@empty_set.path)
     end
   end
+
+  test "build_path creates the correct directory structure when no test name is passed in", context do
+    path = build_path(context)
+    assert path == "priv/static/screens/applesandorangestesthelpertest/test-build_path-creates-the-correct-directory-structure-when-no-test-name-is-passed-in"
+  end
+
+  test "build_path creates the correct directory structure", context do
+    path = build_path(context, "new test")
+    assert path == "priv/static/screens/applesandorangestesthelpertest/new-test"
+  end
 end
