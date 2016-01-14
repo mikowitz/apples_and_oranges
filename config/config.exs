@@ -3,8 +3,7 @@
 use Mix.Config
 
 config :apples_and_oranges, static_app: :apples_and_oranges
-
-config :trot, router: ApplesAndOranges.Router
+config :apples_and_oranges, router: ApplesAndOranges.Router
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
