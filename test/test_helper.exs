@@ -22,7 +22,7 @@ Hound.Supervisor.start_link([
 
 System.at_exit fn(_exit_status) ->
   IO.puts "Deleting test fixtures..."
-  File.rm_rf("priv/static/screens")
+  # File.rm_rf("priv/static/screens")
   :ok = :inets.stop(:httpd, pid)
 end
 

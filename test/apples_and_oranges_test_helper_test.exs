@@ -2,13 +2,14 @@ defmodule ApplesAndOrangesTestHelperTest do
   use ExUnit.Case
   use Hound.Helpers
   use ApplesAndOranges.TestHelper
+  import ApplesAndOranges.TestHelpers
 
   alias ApplesAndOranges.ScreenshotSet
 
   hound_session
 
-  @accepted_set %ScreenshotSet{path: "priv/static/screens/accepted_test"}
-  @empty_set %ScreenshotSet{path: "priv/static/screens/empty_test"}
+  @accepted_set build_set("test_helper", "accepted_test")
+  @empty_set build_set("test_helper", "empty_test")
 
   test "save_screenshot takes a 'current' screenshot" do
     save_screenshot(@accepted_set)

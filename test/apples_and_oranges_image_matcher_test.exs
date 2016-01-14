@@ -3,9 +3,9 @@ defmodule ApplesAndOrangesImageMatcherTest do
   alias ApplesAndOranges.ScreenshotSet
   import ApplesAndOranges.TestHelpers
 
-  @matching_test build_set("matching_test")
-  @diffing_test build_set("diffing_test")
-  @empty_test build_set("empty_test")
+  @matching_test build_set("image_matcher", "matching_test")
+  @diffing_test build_set("image_matcher", "diffing_test")
+  @empty_test build_set("image_matcher", "empty_test")
 
   test "matches when the accepted and current images are the same" do
     assert {:ok, _} = ApplesAndOranges.ImageMatcher.matches?(@matching_test)

@@ -44,7 +44,14 @@
             - status = ApplesAndOranges.ScreenshotSet.status(set)
             %tr(class="#{status}")
               %td(colspan=3)
-                = set.path
+                -# = "#{ApplesAndOranges.ScreenshotSet.case_name(set)} - #{ApplesAndOranges.ScreenshotSet.test_name(set)}"
+                %b= ApplesAndOranges.ScreenshotSet.case_name(set)
+                &nbsp;
+                &ndash;
+                &nbsp;
+                = ApplesAndOranges.ScreenshotSet.test_name(set)
+
+
             %tr(class="#{status}")
               %td
                 = if ApplesAndOranges.ScreenshotSet.accepted_image(set) do

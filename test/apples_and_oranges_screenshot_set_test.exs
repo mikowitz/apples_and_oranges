@@ -1,14 +1,15 @@
 defmodule ApplesAndOranges.ScreenshotSetTest do
   use ExUnit.Case
   alias ApplesAndOranges.ScreenshotSet
+  import ApplesAndOranges.TestHelpers
 
   use Hound.Helpers
   hound_session
 
-  @accepted_set %ScreenshotSet{path: "priv/static/screens/accepted_test"}
-  @empty_set %ScreenshotSet{path: "priv/static/screens/empty_test"}
-  @everything_set %ScreenshotSet{path: "priv/static/screens/everything_test"}
-  @open_set %ScreenshotSet{path: "priv/static/screens/open_test"}
+  @accepted_set build_set("screenshot_set", "accepted_test")
+  @empty_set build_set("screenshot_set", "empty_test")
+  @everything_set build_set("screenshot_set", "everything_test")
+  @open_set build_set("screenshot_set", "open_test")
 
   test "can find existing accepted image" do
     assert ScreenshotSet.accepted?(@accepted_set)

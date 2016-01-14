@@ -1,6 +1,8 @@
 defmodule ApplesAndOranges.ScreenshotSet do
   defstruct path: ""
 
+  @screens_root "priv/static/screens"
+
   def ensure_directory(set) do
     set.path |> Path.absname |> File.mkdir_p!
   end
@@ -38,6 +40,15 @@ defmodule ApplesAndOranges.ScreenshotSet do
       File.rm(diff_image(set))
     end
   end
+
+  def case_name(set) do
+    String.split(set.path, @screens_root) |> List.last |> String.split("/") |> Enum.at(1) |> String.replace("_", " ")
+  end
+
+  def test_name(set) do
+    String.split(set.path, @screens_root) |> List.last |> String.split("/") |> Enum.at(2) |> String.replace("_", " ")
+  end
+
 
   def absolute_path(nil), do: nil
   def absolute_path(path), do: Path.absname(path)
