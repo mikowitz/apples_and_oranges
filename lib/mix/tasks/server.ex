@@ -4,6 +4,9 @@ defmodule Mix.Tasks.ApplesAndOranges.Server do
   @shortdoc "Starts apples_and_oranges server"
 
   def run(args) do
+    IO.inspect "HELLLO!"
+    IO.inspect Application.get_env(:apples_and_oranges, :port)
+    Application.put_env(:trot, :port, Application.get_env(:apples_and_oranges, :port))
     Mix.Task.run "trot.server", args
     no_halt
   end
