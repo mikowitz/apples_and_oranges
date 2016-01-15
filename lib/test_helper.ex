@@ -10,7 +10,7 @@ defmodule ApplesAndOranges.TestHelper do
     end
   end
 
-  @screenshot_root_dir "priv/static/screens"
+  @screenshot_root_dir ScreenshotSet.screens_root
 
   def it_looks_like(context, name \\ nil) do
     path = case name do
@@ -21,8 +21,7 @@ defmodule ApplesAndOranges.TestHelper do
   end
 
   def it_looks_right(path) do
-    set = %ScreenshotSet{path: path}
-    ScreenshotSet.ensure_directory(set)
+    set = ensure_set_directory(path)
     save_screenshot(set)
     case ImageMatcher.matches?(set) do
       {:ok, _} ->
@@ -33,13 +32,17 @@ defmodule ApplesAndOranges.TestHelper do
     end
   end
 
+  def ensure_set_directory(path) do
+    set = %ScreenshotSet{path: path}
+    ScreenshotSet.ensure_directory(set)
+    set
+  end
+
   def save_screenshot(set) do
     take_screenshot(set.path <> "/current.png")
   end
 
-  def build_path(context) do
-    build_path(context, Atom.to_string(context.test))
-  end
+  def build_path(context), do: build_path(context, Atom.to_string(context.test))
   def build_path(context, test_name) do
     (@screenshot_root_dir <> "/" <> base_case_name(context.case) <> "/" <> test_name)
     |> String.replace(" ", "-")

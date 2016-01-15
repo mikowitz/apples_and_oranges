@@ -3,8 +3,10 @@ defmodule ApplesAndOranges.ScreenshotSet do
 
   @screens_root "priv/static/screens"
 
+  def screens_root, do: @screens_root
+
   def ensure_directory(set) do
-    set.path |> Path.absname |> File.mkdir_p!
+    set.path |> absolute_path |> File.mkdir_p!
   end
 
   def accepted_image(set), do: set |> image_named("accepted")
@@ -48,7 +50,6 @@ defmodule ApplesAndOranges.ScreenshotSet do
   def test_name(set) do
     String.split(set.path, @screens_root) |> List.last |> String.split("/") |> Enum.at(2) |> String.replace("_", " ")
   end
-
 
   def absolute_path(nil), do: nil
   def absolute_path(path), do: Path.absname(path)
