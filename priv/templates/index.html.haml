@@ -45,7 +45,10 @@
             - status = ApplesAndOranges.ScreenshotSet.status(set)
             %tr(class="#{status}")
               %td(colspan=3)
-                %b= "#{ApplesAndOranges.ScreenshotSet.case_name(set)} - #{ApplesAndOranges.ScreenshotSet.test_name(set)}"
+                %span
+                  %b= "#{ApplesAndOranges.TemplateHelpers.case_name(set)} "
+                &ndash;
+                = " #{ApplesAndOranges.TemplateHelpers.test_name(set)}"
 
             %tr(class="#{status}")
               %td
