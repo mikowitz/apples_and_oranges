@@ -9,13 +9,11 @@ defmodule ApplesAndOranges.ScreenshotSet do
     set.path |> absolute_path |> File.mkdir_p!
   end
 
-  def accepted_image(set), do: set |> image_named("accepted")
-  def current_image(set), do: set |> image_named("current")
-  def diff_image(set), do: set |> image_named("diff")
-
-  def accepted_image_src(set), do: set |> image_src("accepted")
-  def current_image_src(set), do: set |> image_src("current")
-  def diff_image_src(set), do: set |> image_src("diff")
+  ~w(accepted current diff) |> Enum.each fn file_type ->
+    def unquote(:"#{file_type}_image")(set), do: set |> image_named(unquote(file_type))
+    def unquote(:"#{file_type}_image_src")(set), do: set |> image_src(unquote(file_type))
+    def unquote(:"#{file_type}?")(set), do: !!(set |> image_named(unquote(file_type)))
+  end
 
   defp image_named(nil, _), do: nil
   defp image_named(set, name) do
@@ -30,10 +28,7 @@ defmodule ApplesAndOranges.ScreenshotSet do
     end
   end
 
-  def accepted?(set), do: !!accepted_image(set)
-  def current?(set), do: !!current_image(set)
-  def diff?(set), do: !!diff_image(set)
-
+  def accept!(nil), do: nil
   def accept!(set) do
     accepted_filename = current_image(set) |> String.replace("current.", "accepted.")
     File.cp(current_image(set), accepted_filename)
@@ -51,12 +46,9 @@ defmodule ApplesAndOranges.ScreenshotSet do
   def status(nil), do: nil
   def status(set) do
     cond do
-      diff?(set) ->
-        "diff"
-      accepted?(set) ->
-        "accepted"
-      current?(set) ->
-        "current"
+      diff?(set) -> "diff"
+      accepted?(set) -> "accepted"
+      current?(set) -> "current"
     end
   end
 end

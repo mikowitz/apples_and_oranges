@@ -46,27 +46,29 @@
             %tr(class="#{status}")
               %td(colspan=3)
                 %span
-                  %b= "#{ApplesAndOranges.TemplateHelpers.case_name(set)} "
-                &ndash;
-                = " #{ApplesAndOranges.TemplateHelpers.test_name(set)}"
+                  .h4(style="display:inline;")
+                    = "#{ApplesAndOranges.TemplateHelpers.case_name(set)} "
+                  &mdash;
+                  .h5(style="display:inline;")
+                    = " #{ApplesAndOranges.TemplateHelpers.test_name(set)}"
 
             %tr(class="#{status}")
               %td
-                = if ApplesAndOranges.ScreenshotSet.accepted_image(set) do
-                  %a(href="#{ApplesAndOranges.ScreenshotSet.accepted_image_src(set)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.ScreenshotSet.accepted_image_src(set)}" width=200)
+                = if src = ApplesAndOranges.ScreenshotSet.accepted_image_src(set) do
+                  %a(href="#{src}" target="_blank")
+                    %img(src="#{src}" width=200)
                 - end
               %td
-                = if ApplesAndOranges.ScreenshotSet.current_image(set) do
-                  %a(href="#{ApplesAndOranges.ScreenshotSet.current_image_src(set)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.ScreenshotSet.current_image_src(set)}" width=200)
+                = if src = ApplesAndOranges.ScreenshotSet.current_image_src(set) do
+                  %a(href="#{src}" target="_blank")
+                    %img(src="#{src}" width=200)
                   %br
                   %a.btn.btn-primary(role="button" href="/accept?path=#{set.path}")
                     Accept?
                 - end
               %td
-                = if ApplesAndOranges.ScreenshotSet.diff_image(set) do
-                  %a(href="#{ApplesAndOranges.ScreenshotSet.diff_image_src(set)}" target="_blank")
-                    %img(src="#{ApplesAndOranges.ScreenshotSet.diff_image_src(set)}" width=200)
+                = if src = ApplesAndOranges.ScreenshotSet.diff_image_src(set) do
+                  %a(href="#{src}" target="_blank")
+                    %img(src="#{src}" width=200)
                 - end
           - end
