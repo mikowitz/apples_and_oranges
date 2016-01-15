@@ -1,7 +1,7 @@
 defmodule ApplesAndOranges.ScreenshotSetTest do
   use ExUnit.Case
   alias ApplesAndOranges.ScreenshotSet
-  import ApplesAndOranges.TestHelpers
+  use ApplesAndOranges.TestHelpers
 
   use Hound.Helpers
   hound_session

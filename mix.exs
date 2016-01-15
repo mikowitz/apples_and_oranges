@@ -5,6 +5,7 @@ defmodule ApplesAndOranges.Mixfile do
     [app: :apples_and_oranges,
      version: "0.0.1",
      elixir: "~> 1.1",
+     elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps,
@@ -39,4 +40,7 @@ defmodule ApplesAndOranges.Mixfile do
       files: ~w(lib config mix.exs README.md)
     ]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
 end

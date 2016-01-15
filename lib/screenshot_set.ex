@@ -1,9 +1,7 @@
 defmodule ApplesAndOranges.ScreenshotSet do
   defstruct path: ""
 
-  @screens_root "priv/static/screens"
-
-  def screens_root, do: @screens_root
+  def screens_root, do: "priv/static/screens"
 
   def ensure_directory(set) do
     set.path |> absolute_path |> File.mkdir_p!

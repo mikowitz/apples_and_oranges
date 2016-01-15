@@ -32,18 +32,20 @@ defmodule ApplesAndOranges.TestHelper do
     end
   end
 
-  def ensure_set_directory(path) do
+  defp ensure_set_directory(path) do
     set = %ScreenshotSet{path: path}
     ScreenshotSet.ensure_directory(set)
     set
   end
 
-  def save_screenshot(set) do
+  defp save_screenshot(nil), do: nil
+  defp save_screenshot(set) do
     take_screenshot(set.path <> "/current.png")
   end
 
-  def build_path(context), do: build_path(context, Atom.to_string(context.test))
-  def build_path(context, test_name) do
+  defp build_path(nil), do: nil
+  defp build_path(context), do: build_path(context, Atom.to_string(context.test))
+  defp build_path(context, test_name) do
     (@screenshot_root_dir <> "/" <> base_case_name(context.case) <> "/" <> test_name)
     |> String.replace(" ", "-")
     |> String.downcase

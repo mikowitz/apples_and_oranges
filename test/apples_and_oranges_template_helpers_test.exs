@@ -1,6 +1,6 @@
 defmodule ApplesAndOranges.TemplateHelpersTest do
   use ExUnit.Case
-  import ApplesAndOranges.TestHelpers
+  use ApplesAndOranges.TestHelpers
 
   alias ApplesAndOranges.TemplateHelpers
 

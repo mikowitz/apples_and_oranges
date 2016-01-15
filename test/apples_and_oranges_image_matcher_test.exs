@@ -1,7 +1,7 @@
 defmodule ApplesAndOrangesImageMatcherTest do
   use ExUnit.Case
+  use ApplesAndOranges.TestHelpers
   alias ApplesAndOranges.ScreenshotSet
-  import ApplesAndOranges.TestHelpers
 
   @matching_test build_set("image_matcher", "matching_test")
   @diffing_test build_set("image_matcher", "diffing_test")
