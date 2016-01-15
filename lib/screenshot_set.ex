@@ -26,7 +26,7 @@ defmodule ApplesAndOranges.ScreenshotSet do
   defp image_src(set, name) do
     case image_named(set, name) do
       nil -> nil
-      file -> file |> String.replace("priv/static", "")
+      file -> file |> Path.relative_to("priv/static")
     end
   end
 
@@ -38,22 +38,17 @@ defmodule ApplesAndOranges.ScreenshotSet do
     accepted_filename = current_image(set) |> String.replace("current.", "accepted.")
     File.cp(current_image(set), accepted_filename)
     File.rm(current_image(set))
-    if diff?(set) do
-      File.rm(diff_image(set))
-    end
+    remove(current_image(set))
+    remove(diff_image(set))
   end
 
-  def case_name(set) do
-    String.split(set.path, @screens_root) |> List.last |> String.split("/") |> Enum.at(1) |> String.replace("_", " ")
-  end
-
-  def test_name(set) do
-    String.split(set.path, @screens_root) |> List.last |> String.split("/") |> Enum.at(2) |> String.replace("_", " ")
-  end
+  def remove(nil), do: nil
+  def remove(file), do: File.rm(file)
 
   def absolute_path(nil), do: nil
   def absolute_path(path), do: Path.absname(path)
 
+  def status(nil), do: nil
   def status(set) do
     cond do
       diff?(set) ->

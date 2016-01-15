@@ -1,14 +1,6 @@
 defmodule ApplesAndOranges.ImageMatcher do
   alias ApplesAndOranges.ScreenshotSet
 
-  def compare(set, fuzz \\ 0) do
-    accepted = ScreenshotSet.absolute_path(ScreenshotSet.accepted_image(set))
-    current = ScreenshotSet.absolute_path(ScreenshotSet.current_image(set))
-    diff = accepted |> String.replace("accepted.", "diff.")
-    options = "-metric AE -fuzz #{fuzz}% -dissimilarity-threshold 1 #{accepted} #{current} #{diff}"
-    "compare #{options}" |> String.to_char_list |> :os.cmd
-  end
-
   def matches?(set, fuzz \\ 0) do
     if ScreenshotSet.accepted?(set) do
       comparison = compare(set, fuzz)
@@ -19,5 +11,13 @@ defmodule ApplesAndOranges.ImageMatcher do
     else
       {:raise, "No accepted screenshot"}
     end
+  end
+
+  defp compare(set, fuzz \\ 0) do
+    accepted = ScreenshotSet.absolute_path(ScreenshotSet.accepted_image(set))
+    current = ScreenshotSet.absolute_path(ScreenshotSet.current_image(set))
+    diff = current |> String.replace("current.", "diff.")
+    options = "-metric AE -fuzz #{fuzz}% -dissimilarity-threshold 1 #{accepted} #{current} #{diff}"
+    "compare #{options}" |> String.to_char_list |> :os.cmd
   end
 end

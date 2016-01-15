@@ -14,7 +14,7 @@ defmodule ApplesAndOranges.Router do
   end
 
   get "/" do
-    sets = Path.wildcard("priv/static/screens/**/*.{png,jpg}")
+    sets = Path.wildcard(ScreenshotSet.screens_root <> "/**/*.{png,jpg}")
     |> Enum.map(&Path.dirname(&1))
     |> Enum.uniq
     |> Enum.map fn path -> %ScreenshotSet{path: path} end
