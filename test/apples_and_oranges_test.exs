@@ -45,7 +45,7 @@ defmodule ApplesAndOrangesTest do
     end
     assert ScreenshotSet.current?(
       %ScreenshotSet{
-        path: "priv/static/screens/applesandorangestest/test-build_path-creates-the-correct-directory-structure-when-no-test-name-is-passed-in"
+        path: "priv/static/screens/apples-and-oranges-test/test-build_path-creates-the-correct-directory-structure-when-no-test-name-is-passed-in"
       }
     )
   end
@@ -57,7 +57,7 @@ defmodule ApplesAndOrangesTest do
     end
     assert ScreenshotSet.current?(
       %ScreenshotSet{
-        path: "priv/static/screens/applesandorangestest/new-test"
+        path: "priv/static/screens/apples-and-oranges-test/new-test"
       }
     )
   end

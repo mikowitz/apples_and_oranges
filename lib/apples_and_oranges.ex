@@ -56,5 +56,7 @@ defmodule ApplesAndOranges do
     Atom.to_string(case_name)
     |> String.split(".")
     |> List.last
+    |> Mix.Utils.underscore
+    |> String.replace("_", "-")
   end
 end
