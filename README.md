@@ -36,29 +36,43 @@ Otherwise, you can add it to your dependencies from GitHub:
 
 ### Config
 
-In `config/confix.exs` you need to set two values:
+In `config/confix.exs` you need to set two values for `ApplesAndOranges`:
 
     config :apples_and_oranges, static_app: <your_app_name_here>
     config :apples_and_oranges, router: ApplesAndOranges.router
+
+You also need to config `Hound` to run the webdriver:
+
+    hound_driver = System.get_env("WEBDRIVER") || "phantomjs"
+    config :hound, driver: hound_driver, host: "http://localhost", app_port: 4000
 
 Per environment, you should assign a port for `ApplesAndOranges` to use:
 
     config :apples_and_oranges, port: 1985
 
-These will eventually be set as defaults, but for now be sure to set a different port number for dev and test environments, otherwise you will not be able to run tests with the `ApplesAndOranges` server running. Also something I hope to correct in a future version.
+In `test/test_helper.exs`, ensure `Hound` is running:
+
+    Application.ensure_all_started(:hound)
+
+These will hopefully, eventually be set as defaults, but for now be sure to set a different port number for dev and test environments, otherwise you will not be able to run tests with the `ApplesAndOranges` server running. Also something I hope to correct in a future version.
 
 ### In your tests
 
     defmodule SampleAppScreenshotTesting do
+      use ExUnit.Case
       use ApplesAndOranges
 
-      test "taking a screenshot works" do
+      use Hound.Helpers
+      hound_session
+
+      test "taking a screenshot works", context do
         navigate_to("/")
 
-        it_looks_like("the root screen")
+        it_looks_like(context, "the root screen")
       end
     end
 
+You need to make sure you pass `context` into any test that uses `ApplesAndOranges`, and `context` must always be the first argument passed to `it_looks_like`. If you exclude the second argument, `ApplesAndOranges` will use the name of the test block in the screenshot path name.
 
 The first time you run your tests after adding this, this test will raise an error, saying "No accepted screenshot." This is expected.
 
