@@ -65,7 +65,7 @@ In `test/test_helper.exs`, ensure `Hound` is running:
       test "taking a screenshot works", context do
         navigate_to("/")
 
-        it_looks_like(context, "the root screen")
+        assert it_looks_like(context, "the root screen")
       end
     end
 
