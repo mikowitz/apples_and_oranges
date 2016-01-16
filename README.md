@@ -39,22 +39,19 @@ Otherwise, you can add it to your dependencies from GitHub:
 In `config/confix.exs` you need to set two values for `ApplesAndOranges`:
 
     config :apples_and_oranges, static_app: <your_app_name_here>
-    config :apples_and_oranges, router: ApplesAndOranges.router
+    config :apples_and_oranges, port: 1985
+
+Per environment, you should assign a different port for `ApplesAndOranges` to use. Otherwise, currently, you will not be able to run tests with the `ApplesAndOranges` server running.
 
 You also need to config `Hound` to run the webdriver:
 
     hound_driver = System.get_env("WEBDRIVER") || "phantomjs"
     config :hound, driver: hound_driver, host: "http://localhost", app_port: 4000
 
-Per environment, you should assign a port for `ApplesAndOranges` to use:
-
-    config :apples_and_oranges, port: 1985
 
 In `test/test_helper.exs`, ensure `Hound` is running:
 
     Application.ensure_all_started(:hound)
-
-These will hopefully, eventually be set as defaults, but for now be sure to set a different port number for dev and test environments, otherwise you will not be able to run tests with the `ApplesAndOranges` server running. Also something I hope to correct in a future version.
 
 ### In your tests
 

@@ -25,6 +25,6 @@ defmodule Mix.Tasks.ApplesAndOranges.Server do
 
   defp setup_trot_environment do
     Application.put_env(:trot, :port, Application.get_env(:apples_and_oranges, :port))
-    Application.put_env(:trot, :router, Application.get_env(:apples_and_oranges, :router))
+    Application.put_env(:trot, :router, ApplesAndOranges.Router)
   end
 end
