@@ -15,7 +15,7 @@ If you are using [Homebrew](http://brew.sh), you can install it with:
 #### Webdriver Server
 
 `ApplesAndOranges` uses [Hound](https://github.com/HashNuke/hound/) to take screenshots, and by default uses [PhantomJS](http://phantomjs.org/).
-Any other webdriver server Hound [supports](https://github.com/HashNuke/hound/#features) should also work, but needs to be specified when running tests using the `WEBDRIVER` environment variable.
+Any other webdriver server Hound [supports](https://github.com/HashNuke/hound/#features) should also work, but needs to be specified in the Hound config (see below).
 
 ### Installing ApplesAndOranges
 
