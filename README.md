@@ -45,9 +45,7 @@ Per environment, you should assign a different port for `ApplesAndOranges` to us
 
 You also need to config `Hound` to run the webdriver:
 
-    hound_driver = System.get_env("WEBDRIVER") || "phantomjs"
-    config :hound, driver: hound_driver, host: "http://localhost", app_port: 4000
-
+    config :hound, driver: System.get_env("WEBDRIVER", "phantomjs"), host: "http://localhost", app_port: 4000
 
 In `test/test_helper.exs`, ensure `Hound` is running:
 
