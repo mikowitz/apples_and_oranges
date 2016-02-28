@@ -1,6 +1,6 @@
 # ApplesAndOranges
 
-Screenshot-driven tests for Phoenix projects.
+Screenshot-driven tests for Phoenix projects. (Primarily inspired by [Juxtapose](https://github.com/terriblelabs/motion-juxtapose))
 
 ## Installation
 
